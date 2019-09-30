@@ -24,7 +24,14 @@
 			  $("#m"+i).append(" - "+json[i*3+1]+"<br>")
 			  $("#m"+i).append(" - "+json[i*3+2]+"<br>")
 
-				// Load Location and Time from meta2
+				// Load Location and Time for each class from meta2
+
+				$.getJSON("meta2.json", function(json) {
+					jQuery.each(json, function(i, val) {
+					  $("#m"+i).append(" - "+json[i*2]+"<br>")
+					  $("#m"+i).append(" - "+json[i*2+1]+"<br>")
+					}
+				}
 
 			  if (!json[i+1]) {
 				// Load is complete.
