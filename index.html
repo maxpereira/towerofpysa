@@ -1,0 +1,49 @@
+<html>
+<head>
+	<title>tower.of.pysa</title>
+	<link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<link rel="icon" href="banana.png" sizes="512x512" type="image/png">
+	<script src="jquery.min.js"></script>
+	<script>
+		baseDomain = "https://pisa.ucsc.edu/class_search/"
+		$.getJSON("names.json", function(json) {
+			jQuery.each(json, function(i, val) {
+			  $("#frame").append((i+1)+". "+"<a style='font-size: 24px;' target='_blank' id="+i+">" + val + "</a><div id=m"+i+">");
+			  $("#frame").append(document.createElement("br"));
+			});
+		});
+		$.getJSON("links.json", function(json) {
+			jQuery.each(json, function(i, val) {
+			  $("#"+i).attr("href", baseDomain+val)
+			});
+		});
+		$.getJSON("meta.json", function(json) {
+			jQuery.each(json, function(i, val) {
+			  $("#m"+i).append(" - "+json[i*5]+"<br>")
+			  $("#m"+i).append(" - "+json[i*5+1]+"<br>")
+			  $("#m"+i).append(" - "+json[i*5+2]+"<br>")
+			  $("#m"+i).append(" - "+json[i*5+3]+"<br>")
+			  $("#m"+i).append(" - "+json[i*5+4]+"<br>")
+			  if (!json[i+1]) {
+				// Load is complete.
+				$("#loader").hide()
+				$("#frame").show()
+			  }
+			});
+		});
+		jQuery.get("header.txt", function(data) {
+			$("#header").append(data);
+			
+		});
+	</script>
+</head>
+<body>
+	<img class="ucscGlow" src="bananaOutline.png" height="40px" width="40px"></img>
+	<b class="ucscGlow" style="font-size: 36pt">tower.of.pysa</b>
+	<b id="header" class="ucscGlow fadein"></b>
+	<hr>
+	<center><div id="loader"></div></center>
+	<div id="frame" class="fadein" width='100%' height='100%'></div>
+</body>
+</html>
