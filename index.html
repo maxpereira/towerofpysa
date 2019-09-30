@@ -23,8 +23,9 @@
 			  $("#m"+i).append(" - "+json[i*5]+"<br>")
 			  $("#m"+i).append(" - "+json[i*5+1]+"<br>")
 			  $("#m"+i).append(" - "+json[i*5+2]+"<br>")
-			  $("#m"+i).append(" - "+json[i*5+3]+"<br>")
-			  $("#m"+i).append(" - "+json[i*5+4]+"<br>")
+
+				// Load Location and Time from meta2
+
 			  if (!json[i+1]) {
 				// Load is complete.
 				$("#loader").hide()
@@ -34,7 +35,7 @@
 		});
 		jQuery.get("header.txt", function(data) {
 			$("#header").append(data);
-			
+
 		});
 	</script>
 </head>
