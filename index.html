@@ -27,13 +27,11 @@
 				// Load Location and Time for each class from meta2
 
 				$.getJSON("meta2.json", function(json2) {
-					//jQuery.each(json2, function(i, val2) {
 					  $("#m"+i).append(" - "+json2[i*2]+"<br>")
 					  $("#m"+i).append(" - "+json2[i*2+1]+"<br>")
-					//});
 				});
 
-			  if (!json[i+1]) {
+			  if (!json[i+1] && !json2[i+1]) {
 				// Load is complete.
 				$("#loader").hide()
 				$("#frame").show()
