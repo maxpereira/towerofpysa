@@ -26,10 +26,10 @@
 
 				// Load Location and Time for each class from meta2
 
-				$.getJSON("meta2.json", function(json) {
-					jQuery.each(json, function(i, val) {
-					  $("#m"+i).append(" - "+json[i*2]+"<br>")
-					  $("#m"+i).append(" - "+json[i*2+1]+"<br>")
+				$.getJSON("meta2.json", function(json2) {
+					jQuery.each(json, function(i2, val2) {
+					  $("#m"+i).append(" - "+json2[i2*2]+"<br>")
+					  $("#m"+i).append(" - "+json2[i2*2+1]+"<br>")
 					}
 				}
 
