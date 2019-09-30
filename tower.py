@@ -22,10 +22,12 @@ name_array = [a.replace(u'   ', u' ') for a in name_array]
 link_array = [a.get('href') for a in psoup.findAll('a', attrs={'href' : lambda L: L and L.startswith('index.php?action=detail')})]
 
 enrollment_array = [a.get_text() for a in psoup.findAll('div', attrs={'class' : 'col-xs-6 col-sm-3'})]
+enrollment2_array = [a.get_text() for a in psoup.findAll('div', attrs={'class' : 'col-xs-6 col-sm-6'})]
 
 json_name_obj = json.dumps(name_array)
 json_link_obj = json.dumps(link_array)
 json_enrollment_obj = json.dumps(enrollment_array)
+json_enrollment2_obj = json.dumps(enrollment2_array)
 
 json_output = open("/var/www/html/pisa/names.json", "w")
 json_output.write(json_name_obj)
@@ -37,6 +39,10 @@ json_output.close()
 
 json_output = open("/var/www/html/pisa/meta.json", "w")
 json_output.write(json_enrollment_obj)
+json_output.close()
+
+json_output = open("/var/www/html/pisa/meta2.json", "w")
+json_output.write(json_enrollment2_obj)
 json_output.close()
 
 print("Wrote JSON with " + str(len(name_array)) + " courses.")
