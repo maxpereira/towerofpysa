@@ -6,7 +6,8 @@
 	<link rel="icon" href="banana.png" sizes="512x512" type="image/png">
 	<script src="jquery.min.js"></script>
 	<script>
-		baseDomain = "https://pisa.ucsc.edu/class_search/"
+		var baseDomain = "https://pisa.ucsc.edu/class_search/"
+		var meta2Json = 0;
 		$.getJSON("names.json", function(json) {
 			jQuery.each(json, function(i, val) {
 			  $("#frame").append((i+1)+". "+"<a style='font-size: 24px;' target='_blank' id="+i+">" + val + "</a><div id=m"+i+">");
@@ -19,7 +20,6 @@
 			});
 		});
 		$.getJSON("meta.json", function(json) {
-			var loadFlag = 0;
 			jQuery.each(json, function(i, val) {
 			  $("#m"+i).append(" - "+json[i*3]+"<br>")
 			  $("#m"+i).append(" - "+json[i*3+1]+"<br>")
@@ -27,20 +27,18 @@
 
 				// Load Location and Time for each class from meta2
 
-				$.getJSON("meta2.json", function(json2) {
-					  $("#m"+i).append(" - "+json2[i*2]+"<br>")
-					  $("#m"+i).append(" - "+json2[i*2+1]+"<br>")
-
-						if (!json2[i+1]) {
-							loadFlag = 1;
-						}
-				});
-
-			  if (!json[i+1] && loadFlag == 1) {
-				// Load is complete.
-				$("#loader").hide()
-				$("#frame").show()
+			  if (!json[i+1]) {
+					// Load is complete.
+					$("#loader").hide()
+					$("#frame").show()
 			  }
+			});
+		});
+		$.getJSON("meta2.json", function(json) {
+			jQuery.each(json, function(i, val) {
+				meta2Json = json
+				$("#m"+i).append(" - "+json[i*2]+" "+i+"<br>")
+				$("#m"+i).append(" - "+json[i*2+1]+" "+i+"<br>")
 			});
 		});
 		jQuery.get("header.txt", function(data) {
