@@ -19,6 +19,7 @@
 			});
 		});
 		$.getJSON("meta.json", function(json) {
+			var loadFlag = 0;
 			jQuery.each(json, function(i, val) {
 			  $("#m"+i).append(" - "+json[i*3]+"<br>")
 			  $("#m"+i).append(" - "+json[i*3+1]+"<br>")
@@ -29,9 +30,13 @@
 				$.getJSON("meta2.json", function(json2) {
 					  $("#m"+i).append(" - "+json2[i*2]+"<br>")
 					  $("#m"+i).append(" - "+json2[i*2+1]+"<br>")
+
+						if (!json2[i+1]) {
+							loadFlag = 1;
+						}
 				});
 
-			  if (!json[i+1] && !json2[i+1]) {
+			  if (!json[i+1] && loadFlag == 1) {
 				// Load is complete.
 				$("#loader").hide()
 				$("#frame").show()
