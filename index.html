@@ -21,6 +21,7 @@
 		});
 		$.getJSON("meta.json", function(json) {
 			jQuery.each(json, function(i, val) {
+				console.log(json)
 			  $("#m"+i).append(" - "+json[i*3]+"<br>")
 			  $("#m"+i).append(" - "+json[i*3+1]+"<br>")
 			  $("#m"+i).append(" - "+json[i*3+2]+"<br>")
@@ -36,9 +37,8 @@
 		});
 		$.getJSON("meta2.json", function(json) {
 			jQuery.each(json, function(i, val) {
-				meta2Json = json
-				$("#m"+i).append(" - "+json[i*2]+" "+i+"<br>")
-				$("#m"+i).append(" - "+json[i*2+1]+" "+i+"<br>")
+				$("#m"+i).append(" - "+json[i*2]+"<br>")
+				$("#m"+i).append(" - "+json[i*2+1]+"<br>")
 			});
 		});
 		jQuery.get("header.txt", function(data) {
